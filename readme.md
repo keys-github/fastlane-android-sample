@@ -1,94 +1,115 @@
-# fastlane-android-sample — TestMu AI (Formerly LambdaTest)
+﻿# Run Android Tests with Fastlane on TestMu AI (Formerly LambdaTest)
 
-Sample repo to upload app to lambdatest and test app on real devices.
-
-## Prerequisites
-
-* Install fastlane to your local machine .
-* TestMu AI Authentication credentials . Please refer this [page](https://accounts.lambdatest.com/security) for credentials.
-
-  ```
-    LT_USERNAME=<YOUR_LAMBDATEST_USERNAME>
-    LT_ACCESS_KEY=<YOUR_LAMBDATEST_ACCESS_KEY>
-  ```
-* Install Gradle and Java for running tests.
-
-**_NOTE:_**  Also create `local.properties` file with sdk path , if any issue occurs related to sdk Path.
+<p align="center">
+  <a href="https://www.testmuai.com/"><img src="https://img.shields.io/badge/MADE%20BY%20TestMu%20AI-000000.svg?style=for-the-badge&labelColor=000" alt="Made by TestMu AI"></a>
+  <a href="https://rubygems.org/gems/fastlane"><img src="https://img.shields.io/gem/v/fastlane.svg?style=for-the-badge&labelColor=000000" alt="Fastlane version"></a>
+  <a href="https://community.testmuai.com/"><img src="https://img.shields.io/badge/Join%20the%20community-blueviolet.svg?style=for-the-badge&labelColor=000000" alt="Community"></a>
+</p>
 
 ## Getting Started
 
-* Add [TestMu AI-fastlane-plugin](https://rubygems.org/gems/fastlane-plugin-lambdatest) in your project.
-```
-  fastlane add_plugin lambdatest
-```
+[TestMu AI](https://www.testmuai.com/) (Formerly LambdaTest) is the world's first full-stack AI Agentic Quality Engineering platform that empowers teams to test intelligently, smarter, and ship faster. Built for scale, it offers a full-stack testing cloud with 10K+ real devices and 3,000+ browsers. With AI-native test management, MCP servers, and agent-based automation, TestMu AI supports Selenium, Appium, Playwright, and all major frameworks. 
 
-* Add below action in project fastfile in desired lane to upload app to lambdatest.   
-```
-upload_to_lambdatest(
-    lt_username: ENV["LT_USERNAME"],
-    lt_access_key: ENV["LT_ACCESS_KEY"],
-    file_path: "app_file_path"
-)
-```
-or if you want to used custom_id.
+With TestMu AI (Formerly LambdaTest), you can run Android app tests using Fastlane. This sample shows how to configure Android + Fastlane to run on the TestMu AI cloud.
 
-```
-upload_to_lambdatest(
-    lt_username: ENV["LT_USERNAME"],
-    lt_access_key: ENV["LT_ACCESS_KEY"],
-    file_path: "<app_file_path>",
-    custom_id: "<custom_id>
-)
-```
-This will set  value for ```APP_URL``` environment variable.
+- [Sign up on TestMu AI](https://www.testmuai.com/register/) (Formerly LambdaTest).
+- Follow the [TestMu AI Documentation](https://www.testmuai.com/support/docs/) for the full setup walkthrough.
 
-**_NOTE:_**  custom_id is an optional field.
+### Prerequisites
 
-* Add command in same lane to run tests.
-```
- gradle(task: "test")
-```
+- Fastlane installed on your local machine
+- Gradle and Java for running tests
+- A [TestMu AI](https://www.testmuai.com/) account with your username and access key
 
-* Build project and provide apk file path in fastfile Example - `app/build/outputs/apk/debug/app-debug.apk`
-```
+### Setup
+
+Clone and install dependencies:
+
+```bash
+git clone https://github.com/LambdaTest/fastlane-android-sample && cd fastlane-android-sample
+fastlane add_plugin lambdatest
 gradle build
 ```
 
-* You can run below command to upload app and execute tests on real devices.
+Set your credentials as environment variables.
+
+**macOS / Linux:**
+
+```bash
+export LT_USERNAME="YOUR_USERNAME"
+export LT_ACCESS_KEY="YOUR_ACCESS_KEY"
+export LT_TUNNEL="YOUR_TUNNEL_NAME"
+```
+
+**Windows:**
+
+```bash
+set LT_USERNAME="YOUR_USERNAME"
+set LT_ACCESS_KEY="YOUR_ACCESS_KEY"
+set LT_TUNNEL="YOUR_TUNNEL_NAME"
+```
+
+### Run tests
 
 ```
-    fastlane test
+fastlane test
 ```
 
-## View Test Execution
+View results on your TestMu AI dashboard.
 
-Once you have run your tests, you can view the test execution along with logs. You will be able to see the test cases passing or failing. You can view the same at [TestMu AI Automation](https://accounts.lambdatest.com/login).
+### Local testing with TestMu AI Tunnel
 
-## 🚀 LambdaTest is Now TestMu AI
+To test locally hosted apps, set up the TestMu AI tunnel. OS-specific guides:
 
-👋 Welcome to TestMu AI, the next evolution of LambdaTest. As of January 2026, [LambdaTest is Now TestMu AI](https://www.testmuai.com/lambdatest-is-now-testmuai/) - we have evolved from a cross-browser testing cloud into a unified, AI-native quality engineering platform designed for the modern DevOps era.
+- [Local Testing on Windows](https://www.testmuai.com/support/docs/local-testing-for-windows/)
+- [Local Testing on macOS](https://www.testmuai.com/support/docs/local-testing-for-macos/)
+- [Local Testing on Linux](https://www.testmuai.com/support/docs/local-testing-for-linux/)
 
-Whether you have been part of the LambdaTest community for years or are just discovering TestMu AI, our mission remains the same: to help you ship faster with high-scale test execution, autonomous testing, and deep quality analytics.
+Add the following to your capabilities:
 
-### 🔄 Our Rebrand Journey
+```js
+tunnel: true,
+```
 
-In 2017, we introduced LambdaTest with a clear mission: to become the world's most trusted cloud testing platform. We built a scalable, high-performance test cloud that eliminated flakiness, improved developer feedback cycles, and accelerated release velocity for teams worldwide.
+## Contributions
 
-As LambdaTest grew, we expanded the platform into Test Intelligence, Visual Regression Testing, Accessibility Testing, API Testing, and Performance Testing, covering the entire testing lifecycle. These capabilities enabled teams to test any stack, on any technology, at enterprise scale.
+Contributions are welcome. Open an issue to discuss your idea before submitting a pull request. When reporting bugs, include your Fastlane version, OS, and Gradle version.
 
-Over time, we rebuilt the architecture to be AI-native from the ground up. What began as LambdaTest's high-performance testing cloud has now evolved into TestMu AI, an AI-native, multi-agent platform redefining modern quality engineering.
+## TestMu AI (Formerly LambdaTest) Community
 
-We chose the name TestMu AI to reflect our shift towards intelligent, autonomous testing. While our identity has changed, our core technology and commitment to the testing community stay the same.
+Connect with testers and developers in the [TestMu AI Community](https://community.testmuai.com/). Ask questions, share what you are building, and discuss best practices in test automation and DevOps.
+  
+## TestMu AI (Formerly LambdaTest) Certifications
 
-👉 Find [LambdaTest's New Home](https://www.testmuai.com/).
+Earn free [TestMu AI Certifications](https://www.testmuai.com/certifications/) for testers, developers, and QA engineers. Validate your skills in Selenium, Cypress, Playwright, Appium, Espresso and more. Industry-recognized, shareable on LinkedIn, and built by practitioners, not marketers.
 
-### 🔭 Explore TestMu AI
+## Learning Resources by TestMu AI (Formerly LambdaTest)
 
-The same infrastructure LambdaTest customers relied on, now delivered through autonomous AI agents.
+Learn modern testing through tutorials, guides, videos, and weekly updates:
 
-- [KaneAI](https://www.testmuai.com/kane-ai/)
-- [Agent-to-Agent Testing](https://www.testmuai.com/agent-to-agent-testing/)
-- [HyperExecute](https://www.testmuai.com/hyperexecute/)
-- [Real Device Cloud](https://www.testmuai.com/real-device-cloud/)
-- [Pricing](https://www.testmuai.com/pricing/)
-- [Documentation](https://www.testmuai.com/support/docs/)
+* [TestMu AI Blog](https://www.testmuai.com/blog/)
+* [TestMu AI Learning Hub](https://www.testmuai.com/learning-hub/)
+* [TestMu AI on YouTube](https://www.youtube.com/@TestMuAI)
+* [TestMu AI Newsletter](https://www.testmuai.com/newsletter/)
+  
+## LambdaTest is Now TestMu AI
+
+On **January 12, 2026**, [LambdaTest evolved to TestMu AI](https://www.testmuai.com/lambdatest-is-now-testmuai/), the world's first fully autonomous **Agentic AI Quality Engineering Platform**.
+
+Same team. Same infrastructure. Same customer accounts. All existing LambdaTest logins, scripts, capabilities, and integrations continue to work without change.
+
+Find the new home for [LambdaTest](https://www.testmuai.com).
+
+### How LambdaTest Evolved into TestMu AI
+
+In 2017, we launched LambdaTest with a simple mission: make testing fast, reliable, and accessible. As LambdaTest grew, we expanded into Test Intelligence, Visual Regression Testing, Accessibility Testing, API Testing, and Performance Testing, covering the full depth of the testing lifecycle.
+
+As software development entered the AI era, testing had to evolve, too. We rebuilt the architecture to be AI-native from the ground up, with autonomous agents that **plan, author, execute, analyze, and optimize tests** while keeping humans in the loop. The platform integrates with your repos, CI, IDEs, and terminals, continuously learning from every code change and development signal.
+
+That evolution earned a new name: **TestMu AI**, built for an AI-first future of quality engineering. TestMu is not a new name for us. It is the name of our annual community conference, which has brought together 100,000+ quality engineers to discuss how AI would reshape testing, long before that became an industry norm. 
+
+What started as a high-performance cloud testing platform has transformed into an AI-native, multi-agent system powering a connected, end-to-end quality layer. That evolution defined a new identity: LambdaTest evolved into TestMu AI, built for an AI-first future of quality engineering.
+
+## Support
+
+Got a question? Email [support@testmuai.com](mailto:support@testmuai.com) or chat with us 24x7 from our chat portal.
